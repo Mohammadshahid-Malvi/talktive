@@ -1,6 +1,6 @@
 Episode 3 :- Creating our express server
 
-- Create a repository
+- Create a repositorys
     - git init :- initialize the git.
     - git add README.md :- add files to git
     - git commit -m "Episode-3 created a express server" :- commit code
