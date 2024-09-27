@@ -3,14 +3,35 @@ const express = require('express');
 // Creating a new Express.js Application
 const app = express();
 
+app.get(
+    "/user",
+    (req, res, next)=>{
+        res.send('Request 1....');
+        next();
+    },
+    (req, res, next) => {
+        res.send('Request 2...');
+        next();
+    },
+    (req, res,next) => {
+        res.send('Request 3...');
+        next();
+    },
+    (req, res,next) => {
+        res.send('Request 4...');
+        next();
+    }
+)
+
+
 // if url '/ab+c' so you can add as much character b only before c as you can.
 // if url '/ab*cd' so you can add as much character between ab & cd.
 // if url '/ab?c' so you can ac/abc : because b is optional over here...
 // if use regex like /.*fly$/ means at end fly must present.
 
-app.use("/user",(req,res)=>{
-    // res.send('Route handler 1');
-});
+// app.use("/user",(req,res)=>{
+//     // res.send('Route handler 1');
+// });
 
 // app.get("/user/:userId/:firstName/:lastName",(req,res)=>{
 //     console.log(req.query);     //to get data from postman url like "?userId?userName"
