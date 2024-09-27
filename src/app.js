@@ -1,27 +1,62 @@
 const express = require('express');
 
+
 // Creating a new Express.js Application
 const app = express();
 
-app.get(
-    "/user",
-    (req, res, next)=>{
-        res.send('Request 1....');
-        next();
-    },
+const { adminAuth, userAuth } = require("./middlewares/auth.js");
+
+// Handle Auth Middleware for all request GET, POST, PUT, PATCH, DELETE
+app.all("/admin",
+    adminAuth
+);
+
+app.get('/user', userAuth, (req, res, next) => {
+    res.send('User Fetch Successfully');
+});
+
+app.get("/admin/getUserData",
     (req, res, next) => {
-        res.send('Request 2...');
-        next();
-    },
-    (req, res,next) => {
-        res.send('Request 3...');
-        next();
-    },
-    (req, res,next) => {
-        res.send('Request 4...');
-        next();
+        res.send("Data Fetch Successfully");
     }
-)
+);
+
+app.get("/admin/deleteUserData",
+    (req, res, next) => {
+        res.send('User Deleted Successfully');
+    }
+);
+
+// app.get("/user",(req,res,next)=>{   //This is middleware because it doesn't have response back fn like res.send.
+//     console.log('Second Request handler...1');
+//     next();
+// });
+
+// app.get("/user",(req,res,next)=>{   //This is request handler which handle fulfill request of users.
+//     console.log('first Request handler...2')
+//     res.send('Request 2...');
+// });
+
+
+// app.get(
+//     "/user",
+//     (req, res, next)=>{
+//         res.send('Request 1....');
+//         next();
+//     },
+//     (req, res, next) => {
+//         res.send('Request 2...');
+//         next();
+//     },
+//     (req, res,next) => {
+//         res.send('Request 3...');
+//         next();
+//     },
+//     (req, res,next) => {
+//         res.send('Request 4...');
+//         next();
+//     }
+// )
 
 
 // if url '/ab+c' so you can add as much character b only before c as you can.

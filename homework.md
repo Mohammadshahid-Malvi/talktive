@@ -40,3 +40,8 @@ Episode 05 :- Middlewares & Error Handlers
 - next()
 - next function and errors along with res.send()
 - app.use('/user', fn1, fn2, fn3, fn4, fn5 );
+- what is middleware? Why do we need it?
+- how express.js basically handle request behind the scene.
+- write a dummy auth middleware for admin
+- write a dummy auth middleware for all user except /user/login
+- 
