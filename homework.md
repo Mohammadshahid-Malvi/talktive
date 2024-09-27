@@ -33,3 +33,10 @@ Episode 04 :- Routing and Request Handlers
 - user of regex in routes /a/, /.*lastshouldcomethisonly$/
 - Reading the query params in the routes
 - Reading the dynamic route
+
+Episode 05 :- Middlewares & Error Handlers
+
+- Multiple Route Handlers - play with the code
+- next()
+- next function and errors along with res.send()
+- app.use('/user', fn1, fn2, fn3, fn4, fn5 );
