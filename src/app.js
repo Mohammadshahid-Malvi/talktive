@@ -4,28 +4,49 @@ const express = require('express');
 // Creating a new Express.js Application
 const app = express();
 
-const { adminAuth, userAuth } = require("./middlewares/auth.js");
+// const { adminAuth, userAuth } = require("./middlewares/auth.js");
+
+// Way 1 :- Handle Error in Middleware
+// app.get("/user", (req, res) => {
+//     try {
+//         throw new Error("dfdfd");
+//         res.send('Data send Successfully');
+//     }catch(err){
+//         res.status(500).send('Something Went Wriong !');
+//     }
+// });
+
+// Way 2 :- Handle Error in Middleware
+// app.get("/user", (req, res) => {
+//     throw new Error('ddsfsd');
+//     res.send('Fetch Data Successfylly');
+// });
+// app.use("/", (err, req, res, next) => {
+//     if(err){
+//         res.status(500).send('Something Went Wriong in Way 2 !');
+//     }
+// });
 
 // Handle Auth Middleware for all request GET, POST, PUT, PATCH, DELETE
-app.all("/admin",
-    adminAuth
-);
+// app.all("/admin",
+//     adminAuth
+// );
 
-app.get('/user', userAuth, (req, res, next) => {
-    res.send('User Fetch Successfully');
-});
+// app.get('/user', userAuth, (req, res, next) => {
+//     res.send('User Fetch Successfully');
+// });
 
-app.get("/admin/getUserData",
-    (req, res, next) => {
-        res.send("Data Fetch Successfully");
-    }
-);
+// app.get("/admin/getUserData",
+//     (req, res, next) => {
+//         res.send("Data Fetch Successfully");
+//     }
+// );
 
-app.get("/admin/deleteUserData",
-    (req, res, next) => {
-        res.send('User Deleted Successfully');
-    }
-);
+// app.get("/admin/deleteUserData",
+//     (req, res, next) => {
+//         res.send('User Deleted Successfully');
+//     }
+// );
 
 // app.get("/user",(req,res,next)=>{   //This is middleware because it doesn't have response back fn like res.send.
 //     console.log('Second Request handler...1');
