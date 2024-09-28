@@ -56,3 +56,9 @@ Episode 06 :- Database, Schema & Models
 - Create signup API to add data into database
 - Push some documents using API calls from postman
 - Error handling while working with database
+
+Episode 07 :- Diving into the APIs
+- Difference between js Object vs JSON
+- add the express.json middleware to your app
+- Make your signup API dynamic to receive data from the end user
+- 

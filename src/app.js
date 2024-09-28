@@ -5,28 +5,41 @@ const User = require("./models/user.js");
 // Creating a new Express.js Application
 const app = express();
 
-// Going to create first API of user
-    app.post("/signup", async (req, res) => {
-        const userObj = {
-            firstName:"Mohammadshahid",
-            lastName:"Malvi",
-            emailId:"mohmmadmalvi@gmail.com",
-            password:"malvi1234",
-            phoneNo:9999999999,
-            gender:"Male"
-        }
-        // Creating new instance of the user model
-        const user = new User(userObj);
+app.use(express.json());
 
+// Going to create first API of user
+    // app.post("/signup", async (req, res) => {
+    //     const userObj = {
+    //         firstName:"Mohammadshahid",
+    //         lastName:"Malvi",
+    //         emailId:"mohmmadmalvi@gmail.com",
+    //         password:"malvi1234",
+    //         phoneNo:9999999999,
+    //         gender:"Male"
+    //     }
+    //     // Creating new instance of the user model
+    //     const user = new User(userObj);
+
+    //     try {
+    //         // It will return us a promise & save data into database
+    //         await user.save();
+    //         res.send('User Added Successfully');
+    //     }catch(err){
+    //         res.status(400).send('Error While Saving User data:'+err.message);
+    //     }
+    // });
+
+    // Dynamic Data Create API
+    app.post("/signup",async (req, res) => {
+        // Create new instance of user model
+        const user = new User(req.body);
         try {
-            // It will return us a promise & save data into database
             await user.save();
-            res.send('User Added Successfully');
+            res.send('User added successfully');
         }catch(err){
-            res.status(400).send('Error While Saving User data:'+err.message);
+            res.status(400).send('Error which Save Data: '+err.message);
         }
     });
-
 
 connectDB().
 then(()=>{
