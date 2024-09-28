@@ -1,8 +1,46 @@
 const express = require('express');
-
+const connectDB = require("./config/database.js");
+const User = require("./models/user.js");
 
 // Creating a new Express.js Application
 const app = express();
+
+// Going to create first API of user
+    app.post("/signup", async (req, res) => {
+        const userObj = {
+            firstName:"Mohammadshahid",
+            lastName:"Malvi",
+            emailId:"mohmmadmalvi@gmail.com",
+            password:"malvi1234",
+            phoneNo:9999999999,
+            gender:"Male"
+        }
+        // Creating new instance of the user model
+        const user = new User(userObj);
+
+        try {
+            // It will return us a promise & save data into database
+            await user.save();
+            res.send('User Added Successfully');
+        }catch(err){
+            res.status(400).send('Error While Saving User data:'+err.message);
+        }
+    });
+
+
+connectDB().
+then(()=>{
+    console.log('Database Connection Success');
+    app.listen(3000, ()=>{
+        console.log('server is running on 3000 port......');
+    });
+}).catch((err)=>{
+    console.log('Database Connection failure');
+})
+
+
+// Creating a new Express.js Application
+// const app = express();
 
 // const { adminAuth, userAuth } = require("./middlewares/auth.js");
 
@@ -115,7 +153,8 @@ const app = express();
 
 
 
+
 // Creating web server on 3000 port and it is listening
-app.listen(3000, () => {
-    console.log('server is running on 3000 port...');
-});
+// app.listen(3000, () => {
+//     console.log('server is running on 3000 port...');
+// });
