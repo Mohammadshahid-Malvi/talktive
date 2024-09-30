@@ -29,17 +29,70 @@ app.use(express.json());
     //     }
     // });
 
-    // Dynamic Data Create API
-    app.post("/signup",async (req, res) => {
-        // Create new instance of user model
-        const user = new User(req.body);
-        try {
-            await user.save();
-            res.send('User added successfully');
-        }catch(err){
-            res.status(400).send('Error which Save Data: '+err.message);
+// Dynamic Data Create API
+app.post("/signup",async (req, res) => {
+    // Create new instance of user model
+    const user = new User(req.body);
+    try {
+        console.log(user);
+        await user.save();
+        res.send('User added successfully');
+    }catch(err){
+        res.status(400).send('Error which Save Data: '+err.message);
+    }
+});
+
+// Get User By Email
+app.get("/user", async (req, res) => {
+    const userEmail = req.body.emailId;
+    try {
+        const users = await User.findOne({emailId: userEmail});
+        if(users.length === 0){
+            res.status(404).send('Data not there');
+        }else{
+            res.send(users);
         }
-    });
+    }catch(err){
+        res.status(400).send('Cant find: '+err.message);
+    }
+});
+
+// Feed API - GET - Feed - get all the users from the database
+app.get("/feed", async (req, res) => {
+    try {
+        const allUSer = await User.find({});
+        res.send(allUSer);
+    }catch(err){
+        res.status(400).send('All Data not Available: '+err.message);
+    }
+});
+
+// API - Delete by Id
+app.delete("/user", async (req, res) => {
+    const userId = req.body._id;
+    try {
+        const user = await User.findByIdAndDelete({_id: userId});
+        res.send("User Deleted Successfully");
+    }catch(err){
+        res.status(404).send('Data not found');
+    }
+});
+
+// API - Update Data of the User
+app.patch("/user", async(req, res) => {
+    const userId = req.body._id;
+    const data = req.body;
+    try {
+        await User.findByIdAndUpdate({_id:userId},
+            data,
+            {runValidators:true}
+        );
+        res.send('USer Updated Successfully');
+    }catch(err) {
+        res.status(404).send('Something Went wrong with update...'+err.message);
+    }
+});
+
 
 connectDB().
 then(()=>{

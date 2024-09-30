@@ -61,4 +61,17 @@ Episode 07 :- Diving into the APIs
 - Difference between js Object vs JSON
 - add the express.json middleware to your app
 - Make your signup API dynamic to receive data from the end user
-- 
+- user.findOne with duplicate email id, which object returns
+- API - Get user by email id
+- API - Get allUser
+- Create a Delete user API
+- Difference between PATCH & PUT
+- API - Update a user
+- Explore the mongoose documentation for model Method
+- What are option in Model.findOneAndUpdate method, explore more about it
+- API - Update the user with email id
+
+Episode 08 :- Data sanitization and Schema validation
+- add timestamps to use userSchema
+- add require, minlength, maxlength, lowercase, unique
+- add custom form validation function for schema 
