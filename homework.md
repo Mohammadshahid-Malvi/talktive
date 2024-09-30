@@ -75,3 +75,7 @@ Episode 08 :- Data sanitization and Schema validation
 - add timestamps to use userSchema
 - add require, minlength, maxlength, lowercase, unique
 - add custom form validation function for schema 
+- API Level validation on patch request
+- Data sanitization - API Validation for each fields
+- Install Validator
+- Explore the validator function

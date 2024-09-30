@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require("./config/database.js");
 const User = require("./models/user.js");
+const validator = require('validator');
 
 // Creating a new Express.js Application
 const app = express();
@@ -79,13 +80,34 @@ app.delete("/user", async (req, res) => {
 });
 
 // API - Update Data of the User
-app.patch("/user", async(req, res) => {
-    const userId = req.body._id;
+app.patch("/user/:userId", async(req, res) => {
+    const userId = req.params?.userId;
     const data = req.body;
     try {
+        // const ALLOWED_UPDATES = [
+        //     "firstname",
+        //     "lastName",
+        //     "password",
+        //     "phoneNo",
+        //     "gender",
+        //     "photoURL",
+        //     "about",
+        //     "skills"
+        // ];
+        // const isUpdateAllowed = Object.keys(data)
+        // .every((k) => ALLOWED_UPDATES.includes(k));
+
+        // if(!isUpdateAllowed){
+        //     throw new Error('Updates not allowed');
+        // }
+        if(data?.skills.length > 3){
+            throw new Error("Skills not greater than 3");
+        }
         await User.findByIdAndUpdate({_id:userId},
-            data,
-            {runValidators:true}
+            data, {
+                returnDocument: "after",
+                runValidators:true
+            }
         );
         res.send('USer Updated Successfully');
     }catch(err) {
